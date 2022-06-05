@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+
 	"io"
 	"io/ioutil"
 	"os"
@@ -27,7 +28,7 @@ func generateSha256(path string) []byte {
 	h := sha256.New()
 	b, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	h.Write(b)
 	sum := h.Sum(nil)
