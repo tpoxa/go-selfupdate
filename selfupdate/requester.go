@@ -7,15 +7,14 @@ import (
 )
 
 // Requester interface allows developers to customize the method in which
-// requests are made to retrieve the version and binary
+// requests are made to retrieve the version and binary.
 type Requester interface {
 	Fetch(url string) (io.ReadCloser, error)
 }
 
 // HTTPRequester is the normal requester that is used and does an HTTP
-// to the url location requested to retrieve the specified data.
-type HTTPRequester struct {
-}
+// to the URL location requested to retrieve the specified data.
+type HTTPRequester struct{}
 
 // Fetch will return an HTTP request to the specified url and return
 // the body of the result. An error will occur for a non 200 status code.
@@ -48,7 +47,7 @@ func (mr *mockRequester) handleRequest(requestHandler func(string) (io.ReadClose
 
 func (mr *mockRequester) Fetch(url string) (io.ReadCloser, error) {
 	if len(mr.fetches) <= mr.currentIndex {
-		return nil, fmt.Errorf("No for currentIndex %d to mock", mr.currentIndex)
+		return nil, fmt.Errorf("no for currentIndex %d to mock", mr.currentIndex)
 	}
 	current := mr.fetches[mr.currentIndex]
 	mr.currentIndex++
